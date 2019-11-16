@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+  <!-- O conteúdo entra aqui -->
+  <div id="app">
+
+    <div id="orgs" v-for="org in sorted_orgs">
+      <details>
+        <summary>
+        {{ org.name }} &ndash; {{ org.datasets.length }}
+        </summary>
+        <ul>
+          <li v-for="dataset in org.datasets">
+            <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
+            <ul>
+              <li v-for="res in dataset.resources">
+                <!-- {{ res }} -->
+                <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">{{ res.title }} -- {{ res.format }}</a> 
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- Se apagar isto, nada carrega :( -->
+    <div id="datasets" v-for="dataset in datasets">
+      <!-- <h3>{{ dataset.title }}</h3> -->
+    </div>
+
+  </div>
+
+  <script src="js/vendor/vue-2.6.10.js"></script>
+  <script src="js/vendor/axios-0.18.0.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
