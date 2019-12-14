@@ -10,13 +10,20 @@
     src: local('Inter Light'), url('../fonts/Inter/Inter-Light.ttf') format('truetype');
 }
 
-
 @font-face {
     font-family: 'Inter';
     font-weight: 400;
     font-style: normal;
-    src: local('Inter'), url('../fonts/Inter/Inter-Regular.ttf') format('truetype');
+    src: local('Inter Regular'), url('../fonts/Inter/Inter-Regular.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-style: normal;
+    src: local('Inter Medium'), url('../fonts/Inter/Inter-Medium.ttf') format('truetype');
+}
+
 
 @font-face {
     font-family: 'Inter';
@@ -48,13 +55,6 @@ h6 {}
 
 a {
   color: #6DA396;
-}
-
-a[href*="https://dados.gov.pt"]::after { /* external links */
-    display: inline-block;
-    content: '↗';
-    margin-right: 2px;
-    vertical-align: text-bottom;
 }
 
 
@@ -155,35 +155,56 @@ body {
   border-radius: 20px;
 }
 */
-.orgs ul li {
-  margin-top: 0.5rem;
+
+.orgs ul.detailed-list > li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
-.orgs li ul {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+.orgs ul.detailed-list > li > a {
+  display: inline-block;
 }
 
 del {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.unavailable {
-  text-decoration: line-through;
-  color: grey;
+.orgs li ul.dataset-resources {
+  font-size: 0.875rem;
+  line-height: 1;
+  display: inline-block;
 }
 
-ul.dataset-resources {
-  display: inline;
-}
-ul.dataset-resources li {
-  display: inline;
+.orgs ul.dataset-resources li {
+  display: inline-block;
+  margin-left: 0.5rem;
 }
 
-.dataset-resource {
+.orgs .dataset-resource {
   text-decoration: none;
 }
-.resource-format {
-  border: 1px solid blue;
-  padding: 5px;
+
+.orgs .resource-format {
+  font-size: 80%;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: inline-block;
+  border: 1px solid #6DA396;
+  padding: 0.25rem;
 }
+
+.unavailable,
+.orgs .unavailable,
+.orgs .dataset-resource.unavailable .resource-format {
+  text-decoration: line-through;
+  color: grey;
+  border-color: lightgrey;
+}
+
+.orgs li ul.dataset-metadata {
+  font-size: 0.875rem;
+  line-height: 1;
+  display: block;
+  margin: 0.25rem 0 1rem;
+}
+
