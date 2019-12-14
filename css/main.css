@@ -117,3 +117,18 @@ del {
   text-decoration: line-through;
   color: grey;
 }
+
+ul.dataset-resources {
+  display: inline;
+}
+ul.dataset-resources li {
+  display: inline;
+}
+
+.dataset-resource {
+  text-decoration: none;
+}
+.resource-format {
+  border: 1px solid blue;
+  padding: 5px;
+}

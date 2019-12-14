@@ -24,11 +24,20 @@ var vm = new Vue({
         for (var idx in vm.datasets) {
           var dataset = vm.datasets[idx];
           var org = dataset.organization;
-          dataset.unavailable = !isDatasetAvailable(dataset);
 
           moment.locale('pt');
           dataset.human_last_modified = moment(dataset.last_modified).fromNow();
           dataset.human_last_update = moment(dataset.last_update).fromNow();
+
+          dataset.unavailable = !isDatasetAvailable(dataset);
+
+          for (var ri in dataset.resources) {
+            res = dataset.resources[ri];
+            res.hasRelevantName = hasRelevantName(res, dataset);
+            if (res.title == 'Json metainfo url') {
+              res.format = 'metadata';
+            }
+          }
 
           if (!org) {
             vm.orphans.push(dataset);
@@ -57,10 +66,25 @@ var vm = new Vue({
 function isDatasetAvailable(dataset) {
   for (var r in dataset.resources) {
     res = dataset.resources[r];
-    if (res.extras && res.extras['check:available'] === true) {
-      return true;
+    if (res.extras && res.extras['check:available'] === false) {
+      return false;
     }
   }
-  return false;
+  return true;
   // if (dataset.resources.filter(res => res.extras['check:available'] == false).length) {
+}
+
+function hasRelevantName(res, dataset) {
+  if (res.title.toLowerCase() == dataset.title.toLowerCase()) {
+    return false;
+  } else if (res.title.startsWith('Exportar para')) {
+    return false;
+  } else if (res.title.endsWith('.xml') || res.title.endsWith('.csv') || res.title.endsWith('.geojson') ||
+             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.geojson') ||
+  ) {
+    return false;
+  } else if (['Dataset json url', 'Json metainfo url', 'GeoJSON'].indexOf(res.title) > -1) {
+    return false;
+  }
+  return true;
 }
