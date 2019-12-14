@@ -86,8 +86,8 @@ function hasRelevantName(res, dataset) {
   } else if (res.title.startsWith('Exportar para')) {
     return false;
   } else if (res.title.endsWith('.xml') || res.title.endsWith('.csv') || res.title.endsWith('.geojson') ||
-             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.json')
-  ) {
+             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.json')) 
+  {
     return false;
   } else if (['Dataset json url', 'Json metainfo url', 'GeoJSON'].indexOf(res.title) > -1) {
     return false;
