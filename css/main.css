@@ -93,7 +93,6 @@ body {
 }
 
 .orgs summary {
-  cursor: pointer;
 }
 
 .orgs summary:hover {
@@ -107,21 +106,27 @@ body {
 }
 
 .orgs summary h3 span {
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-weight: 400;
+  font-variant-numeric: lining-nums tabular-nums; /* tabular lining numerals */
 }
 
 .orgs summary h3 strong {
   font-weight: 700;
+  min-width: 1.75rem;
+  text-align: right;
   display: inline-block;
-  color: #fff;
-  background: #505958;
+  background: rgba(174,191,161, 0.7);
   padding: 0.5rem 0.3rem 0.5rem 0.7rem;
   border-radius: 20px 0 0 20px;
 }
 
 .orgs summary h3 em {
   display: inline-block;
-  background: #aebfa1;
+  min-width: 1.75rem;
+  text-align: left;
+  color: rgba(80,89,88, 0.7); /* #505958 */
+  background: rgba(174,191,161, 0.4);
   padding: 0.5rem 0.7rem 0.5rem 0.3rem;
   border-radius: 0 20px 20px 0;
 }
