@@ -29,8 +29,10 @@
             <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
             <ul>
               <li v-for="res in dataset.resources">
-                <!-- {{ res }} -->
-                <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">{{ res.title }} -- {{ res.format }}</a> 
+                <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">
+                  <span v-if="res.title != dataset.title" class="dataset-title">{{ res.title }} -- </span>
+                  {{ res.format }}
+                </a> 
               </li>
             </ul>
 
