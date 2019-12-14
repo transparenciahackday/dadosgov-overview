@@ -19,11 +19,23 @@
 
   <!-- O conteúdo entra aqui -->
   <div id="app">
-
+    
     <div class="orgs" v-for="org in sorted_orgs" v-if="org.datasets.length > 3">
       <details>
         <summary>
-          <h3>{{ org.name }} <span>{{ org.datasets.length }} ({{ org.datasets.filter(dataset => !dataset.unavailable ).length }} disponíveis)</span></h3>
+          <h3>
+            {{ org.name }}
+            <span>
+                <strong aria-label="datasets disponíveis">{{ org.datasets.filter(dataset => !dataset.unavailable ).length }}</strong><em aria-label="datasets listados">{{ org.datasets.length }}</em>
+            </span>
+          </h3>
+          <!--
+          <p class="numbers">
+            <span>datasets</span>
+            <span> <strong>{{ org.datasets.length }}</strong> <em>listados</em></span>
+            <span> <strong>{{ org.datasets.filter(dataset => !dataset.unavailable ).length }}</strong> <em>disponíveis</em></span>
+          </p>
+          -->
         </summary>
         <ul>
           <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in org.datasets">
