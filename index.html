@@ -1,17 +1,18 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
 
 <head>
   <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
+  <title>Dados.Gov Overview</title>
+  <meta name="description" content="Um explorador para os datasets disponíveis no Dados.Gov">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
   <link rel="apple-touch-icon" href="icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/main.css">
 
-  <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
@@ -19,10 +20,10 @@
   <!-- O conteúdo entra aqui -->
   <div id="app">
 
-    <div id="orgs" v-for="org in sorted_orgs">
+    <div class="orgs" v-for="org in sorted_orgs">
       <details>
         <summary>
-        {{ org.name }} &ndash; {{ org.datasets.length }}
+            <h3>{{ org.name }} <span>{{ org.datasets.length }}</span></h3>
         </summary>
         <ul>
           <li v-for="dataset in org.datasets">

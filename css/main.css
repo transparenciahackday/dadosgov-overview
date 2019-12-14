@@ -1,24 +1,113 @@
+
+/* Typography
+*/
+
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 300;
+    font-style: normal;
+    src: local('Inter Light'), url('../fonts/Inter/Inter-Light.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-style: normal;
+    src: local('Inter'), url('../fonts/Inter/Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-style: normal;
+    src: local('Inter Bold'), url('../fonts/Inter/Inter-Bold.ttf') format('truetype');
+}
+
+
 body {
-  background: #20262E;
-  padding: 20px;
-  font-family: Helvetica;
+  font-size: 100%;
+  font-family: "Inter", Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+h1 {}
+h2 {}
+h3 { font-size: 1.5rem; }
+h4 {}
+h5 {}
+h6 {}
+
+
+/* Layout */
+
+
+body {
+  color: #505958;
+  background: #aebfa1;
 }
 
 #app {
-  background: #fff;
-  border-radius: 4px;
   padding: 20px;
   transition: all 0.2s;
+  /*
+  display: flex;
+  flex-direction: column;
+  */
+  /*
+  display: grid;
+  grid-auto-rows: 6rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem 2rem;
+  */
 }
 
-ul {
-  padding-left: 2em;
+.orgs {
+  padding: 1rem;
+  background: #fff;
+  
+  width: 80%;
+  max-width: 50rem;
+  margin: 1rem auto;
 }
 
-h2 {
-  font-weight: bold;
-  margin-bottom: 15px;
+.orgs summary {
+  cursor: pointer;
 }
+
+/*
+.orgs summary::-webkit-details-marker {
+  display:none;
+}*/
+
+.orgs summary:hover {
+  cursor: pointer;
+}
+
+.orgs summary h3 {
+  display: inline-block;
+}
+
+
+.orgs summary span {
+  font-size: 80%;
+  font-weight: 700;
+}
+
+.orgs ul li {
+  margin-top: 0.5rem;
+}
+
+.orgs li ul {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
 
 del {
   color: rgba(0, 0, 0, 0.3);
