@@ -3,12 +3,13 @@ var vm = new Vue({
   data: {
     datasets: [],
     orgs: [],
+    orphans: [],
     orgList: [],
   },
   computed: {
     sorted_orgs() {
       return this.orgs.sort((a, b) => { return b.datasets.length - a.datasets.length;});
-    }
+    },
   },
   mounted: function() {
     var vm = this;
@@ -18,15 +19,14 @@ var vm = new Vue({
     axios
       .get(datasetsURL)
       .then(function(response) {
-        console.log(response.data[0]);
         vm.datasets = response.data;
         for (var idx in vm.datasets) {
           var dataset = vm.datasets[idx];
           var org = dataset.organization;
+          dataset.unavailable = !isDatasetAvailable(dataset);
 
           if (!org) {
-            console.log('Orphan dataset');
-            console.log(dataset.title);
+            vm.orphans.push(dataset);
           } else {
             if (vm.orgList.indexOf(org.acronym) == -1) {
               org.datasets = [];
@@ -39,7 +39,7 @@ var vm = new Vue({
             }
           }
         }
-        console.log(vm.orgs);
+        // console.log(vm.orgs);
       })
       .catch(error => {
         console.log(error);
@@ -48,3 +48,14 @@ var vm = new Vue({
   },
 
 })
+
+function isDatasetAvailable(dataset) {
+  for (var r in dataset.resources) {
+    res = dataset.resources[r];
+    if (res.extras && res.extras['check:available'] === true) {
+      return true;
+    }
+  }
+  return false;
+  // if (dataset.resources.filter(res => res.extras['check:available'] == false).length) {
+}

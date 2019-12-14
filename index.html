@@ -20,7 +20,30 @@
   <!-- O conteúdo entra aqui -->
   <div id="app">
 
-    <div class="orgs" v-for="org in sorted_orgs">
+    <div class="orgs" v-for="org in sorted_orgs" v-if="org.datasets.length > 3">
+      <details>
+        <summary>
+          <h3>{{ org.name }} <span>{{ org.datasets.length }} ({{ org.datasets.filter(dataset => !dataset.unavailable ).length }} disponíveis)</span></h3>
+        </summary>
+        <ul>
+          <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in org.datasets">
+            <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
+            <ul>
+              <li v-for="res in dataset.resources">
+                <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">
+                  <span v-if="res.title != dataset.title" class="dataset-title">{{ res.title }} -- </span>
+                  {{ res.format }}
+                </a> 
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+      </details>
+    </div>
+
+    <h2>Organizações com 3 ou menos datasets</h2>
+    <div class="orgs" v-for="org in sorted_orgs" v-if="org.datasets.length < 4">
       <details>
         <summary>
             <h3>{{ org.name }} <span>{{ org.datasets.length }}</span></h3>
@@ -30,8 +53,10 @@
             <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
             <ul>
               <li v-for="res in dataset.resources">
-                <!-- {{ res }} -->
-                <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">{{ res.title }} -- {{ res.format }}</a> 
+                <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">
+                  <span v-if="res.title != dataset.title" class="dataset-title">{{ res.title }} -- </span>
+                  {{ res.format }}
+                </a> 
               </li>
             </ul>
 
@@ -39,6 +64,24 @@
         </ul>
       </details>
     </div>
+
+    <h2>Datasets sem organização associada</h2>
+      <ul>
+        <li v-for="dataset in orphans">
+          <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
+          <ul>
+            <li v-for="res in dataset.resources">
+              <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">
+                <span v-if="res.title != dataset.title" class="dataset-title">{{ res.title }} -- </span>
+                {{ res.format }}
+              </a> 
+            </li>
+          </ul>
+
+        </li>
+      </ul>
+    </div>
+
 
     <!-- Se apagar isto, nada carrega :( -->
     <div id="datasets" v-for="dataset in datasets">
