@@ -38,18 +38,34 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {}
 h2 {}
-h3 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
 h4 {}
 h5 {}
 h6 {}
 
+/* Common elements
+*/
+
+a {
+  color: #6DA396;
+}
+
+a[href*="https://dados.gov.pt"]::after { /* external links */
+    display: inline-block;
+    content: '↗';
+    margin-right: 2px;
+    vertical-align: text-bottom;
+}
+
 
 /* Layout */
 
+html {
+  background: rgba(174,191,161, 0.4); /* #aebfa1 */
+}
 
 body {
   color: #505958;
-  background: #aebfa1;
 }
 
 #app {
@@ -71,8 +87,8 @@ body {
   padding: 1rem;
   background: #fff;
   
-  width: 80%;
-  max-width: 50rem;
+  width: 70%;
+  max-width: 60rem;
   margin: 1rem auto;
 }
 
@@ -80,25 +96,60 @@ body {
   cursor: pointer;
 }
 
-/*
-.orgs summary::-webkit-details-marker {
-  display:none;
-}*/
-
 .orgs summary:hover {
   cursor: pointer;
 }
 
 .orgs summary h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.orgs summary h3 span {
+  font-size: 0.875rem;
+}
+
+.orgs summary h3 strong {
+  font-weight: 700;
+  display: inline-block;
+  color: #fff;
+  background: #505958;
+  padding: 0.5rem 0.3rem 0.5rem 0.7rem;
+  border-radius: 20px 0 0 20px;
+}
+
+.orgs summary h3 em {
+  display: inline-block;
+  background: #aebfa1;
+  padding: 0.5rem 0.7rem 0.5rem 0.3rem;
+  border-radius: 0 20px 20px 0;
+}
+
+/*
+.orgs summary .numbers {
+  line-height: 1;
+  padding: 1rem 0;
+}
+
+.orgs summary .numbers span {
   display: inline-block;
 }
 
-
-.orgs summary span {
-  font-size: 80%;
-  font-weight: 700;
+.orgs summary em {  
+  font-size: 0.875rem;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
+.orgs summary .numbers span strong {
+  font-weight: 700;
+  display: block;
+  background: #aebfa1;
+  padding: 0.5rem;
+  border-radius: 20px;
+}
+*/
 .orgs ul li {
   margin-top: 0.5rem;
 }
@@ -107,7 +158,6 @@ body {
   margin-left: 1rem;
   margin-bottom: 1rem;
 }
-
 
 del {
   color: rgba(0, 0, 0, 0.3);
