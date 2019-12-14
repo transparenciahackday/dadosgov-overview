@@ -67,10 +67,13 @@ function isDatasetAvailable(dataset) {
   for (var r in dataset.resources) {
     res = dataset.resources[r];
     if (res.extras && res.extras['check:available'] === false) {
-      return false;
+      // one unavailable item, do nothing
+    } else {
+      // there is at least a single available item, so we should return true
+      return true;
     }
   }
-  return true;
+  return false;
   // if (dataset.resources.filter(res => res.extras['check:available'] == false).length) {
 }
 
@@ -80,7 +83,7 @@ function hasRelevantName(res, dataset) {
   } else if (res.title.startsWith('Exportar para')) {
     return false;
   } else if (res.title.endsWith('.xml') || res.title.endsWith('.csv') || res.title.endsWith('.geojson') ||
-             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.geojson') ||
+             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.geojson')
   ) {
     return false;
   } else if (['Dataset json url', 'Json metainfo url', 'GeoJSON'].indexOf(res.title) > -1) {
