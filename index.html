@@ -37,7 +37,7 @@
           </p>
           -->
         </summary>
-        <ul>
+        <ul class="detailed-list">
           <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in sorted_datasets(org)">
             <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
             <ul class="dataset-resources">
