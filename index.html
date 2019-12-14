@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="pt">
 
 <head>
   <meta charset="utf-8">
@@ -28,11 +28,17 @@
         <ul>
           <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in org.datasets">
             <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
+            <ul class="dataset-metadata">
+              <li v-if="dataset.frequency != 'unknown'">Frequência: {{ dataset.frequency }}</li>
+              <li>Última atualização: {{ dataset.human_last_update }}</li>
+              <li>Última modificação: {{ dataset.human_last_modified }}</li>
+            </ul>
             <ul>
               <li v-for="res in dataset.resources">
                 <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">
                   <span v-if="res.title != dataset.title" class="dataset-title">{{ res.title }} -- </span>
-                  {{ res.format }}
+                  {{ res.format }} -- 
+                  {{ res.last_modified }}
                 </a> 
               </li>
             </ul>
@@ -46,16 +52,22 @@
     <div id="orgs" v-for="org in sorted_orgs" v-if="org.datasets.length < 4">
       <details>
         <summary>
-        {{ org.name }} &ndash; {{ org.datasets.length }}
+          {{ org.name }} &ndash; {{ org.datasets.length }} ({{ org.datasets.filter(dataset => !dataset.unavailable ).length }} disponíveis)
         </summary>
         <ul>
-          <li v-for="dataset in org.datasets">
+          <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in org.datasets">
             <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
+            <ul class="dataset-metadata">
+              <li v-if="dataset.frequency != 'unknown'">Frequência: {{ dataset.frequency }}</li>
+              <li>Última atualização: {{ dataset.human_last_update }}</li>
+              <li>Última modificação: {{ dataset.human_last_modified }}</li>
+            </ul>
             <ul>
               <li v-for="res in dataset.resources">
                 <a v-bind:class="{ unavailable: !res.extras['check:available'] }" :href="res.url" target="_blank">
                   <span v-if="res.title != dataset.title" class="dataset-title">{{ res.title }} -- </span>
-                  {{ res.format }}
+                  {{ res.format }} -- 
+                  {{ res.last_modified }}
                 </a> 
               </li>
             </ul>
@@ -92,6 +104,8 @@
 
   <script src="js/vendor/vue-2.6.10.js"></script>
   <script src="js/vendor/axios-0.18.0.js"></script>
+  <script src="js/vendor/moment.min.js"></script>
+  <script src="js/vendor/moment-locale-pt.js"></script>
   <script src="js/main.js"></script>
 </body>
 

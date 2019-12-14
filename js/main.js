@@ -16,6 +16,7 @@ var vm = new Vue({
     // var datasetsURL = 'https://github.com/centraldedados/dadosgov-datasets/raw/master/data/datasets.json';
     var datasetsURL = '/datasets.json';
 
+    
     axios
       .get(datasetsURL)
       .then(function(response) {
@@ -24,6 +25,10 @@ var vm = new Vue({
           var dataset = vm.datasets[idx];
           var org = dataset.organization;
           dataset.unavailable = !isDatasetAvailable(dataset);
+
+          moment.locale('pt');
+          dataset.human_last_modified = moment(dataset.last_modified).fromNow();
+          dataset.human_last_update = moment(dataset.last_update).fromNow();
 
           if (!org) {
             vm.orphans.push(dataset);
