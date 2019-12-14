@@ -163,6 +163,7 @@ body {
 
 .orgs ul.detailed-list > li > a {
   display: inline-block;
+  font-weight: 500;
 }
 
 del {
@@ -203,6 +204,7 @@ del {
 
 .orgs li ul.dataset-metadata {
   font-size: 0.875rem;
+  font-weight: 300;
   line-height: 1;
   display: block;
   margin: 0.25rem 0 1rem;
