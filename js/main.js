@@ -53,14 +53,17 @@ var vm = new Vue({
             }
           }
         }
-        // console.log(vm.orgs);
       })
       .catch(error => {
         console.log(error);
         vm.errored = true;
       });
   },
-
+  methods: {
+    sorted_datasets(org) {
+      return org.datasets.sort((a, b) => (a.title < b.title) ? -1 : (a.title > b.title) ? 1 : 0);
+    }
+  }
 })
 
 function isDatasetAvailable(dataset) {
@@ -83,7 +86,7 @@ function hasRelevantName(res, dataset) {
   } else if (res.title.startsWith('Exportar para')) {
     return false;
   } else if (res.title.endsWith('.xml') || res.title.endsWith('.csv') || res.title.endsWith('.geojson') ||
-             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.geojson')
+             res.title.endsWith('.xls') || res.title.endsWith('.xlsx') || res.title.endsWith('.json')
   ) {
     return false;
   } else if (['Dataset json url', 'Json metainfo url', 'GeoJSON'].indexOf(res.title) > -1) {

@@ -38,7 +38,7 @@
           -->
         </summary>
         <ul>
-          <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in org.datasets">
+          <li v-bind:class="{ unavailable: dataset.unavailable }" v-for="dataset in sorted_datasets(org)">
             <a :href="dataset.page" target="_blank">{{ dataset.title }}</a>
             <ul class="dataset-resources">
               <li v-for="res in dataset.resources">
@@ -48,10 +48,12 @@
                 </a> 
               </li>
             </ul>
+            <!--
             <ul class="dataset-metadata">
               <li v-if="dataset.frequency != 'unknown'">Frequência: {{ dataset.frequency }}</li>
               <li><span :title="'Atualizado em ' + dataset.last_update">Atualizado {{ dataset.human_last_update }}</span> e <span :title="'Modificado em ' + dataset.last_modified">modificado {{ dataset.human_last_modified }}.</li>
             </ul>
+            -->
 
           </li>
         </ul>
